@@ -1,0 +1,562 @@
+@import url("https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&family=Eater&family=Butcherman&family=Metal+Mania&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  cursor: none;
+}
+
+body {
+  font-family: "Metal Mania", cursive;
+  background: #000;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* Custom Cursor */
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #8b0000;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  transition: transform 0.2s ease;
+  mix-blend-mode: difference;
+}
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: #ff0000;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 10001;
+  box-shadow: 0 0 10px #ff0000;
+}
+
+/* Spotlight */
+.spotlight {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background: radial-gradient(
+    circle 400px at var(--x, 50%) var(--y, 50%),
+    transparent 0%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
+  mix-blend-mode: multiply;
+}
+
+/* Blood Drip */
+.blood-drip {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(180deg, #8b0000 0%, transparent 100%);
+  opacity: 0.3;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Navigation */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 20px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
+  border-bottom: 1px solid rgba(139, 0, 0, 0.3);
+}
+.menu-toggle {
+  display: none;
+  background: transparent;
+  color: #8b0000;
+  border: 2px solid #8b0000;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 1100;
+  font-family: "Butcherman", cursive;
+}
+.menu-toggle:focus {
+  outline: 2px solid #ff0000;
+}
+nav.open .nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 90%;
+  background: rgba(0, 0, 0, 0.9);
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 20px;
+  border-radius: 8px;
+}
+.logo {
+  font-family: "Nosifer", cursive;
+  font-size: 32px;
+  color: #8b0000;
+  text-shadow:
+    0 0 10px #ff0000,
+    0 0 20px #8b0000,
+    2px 2px 0 #000;
+  letter-spacing: 3px;
+  animation: flicker 3s infinite;
+}
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  75% {
+    opacity: 0.9;
+  }
+}
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+.nav-links a {
+  color: #999;
+  text-decoration: none;
+  font-size: 16px;
+  letter-spacing: 2px;
+  position: relative;
+  font-family: "Butcherman", cursive;
+  transition: all 0.3s;
+}
+.nav-links a:hover {
+  color: #8b0000;
+  text-shadow: 0 0 10px #ff0000;
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #8b0000;
+  transition: width 0.3s;
+}
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.parallax-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120%;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23000000" width="1200" height="800"/><path fill="%23111111" d="M0 400 Q300 350 600 400 T1200 400 V800 H0 Z"/></svg>')
+    center/cover no-repeat;
+  transform: translateZ(0);
+  will-change: transform;
+}
+.hero-content {
+  text-align: center;
+  z-index: 10;
+  animation: fadeInUp 1.5s ease;
+}
+.hero-title {
+  font-family: "Nosifer", cursive;
+  font-size: 120px;
+  color: #8b0000;
+  text-shadow:
+    0 0 20px #ff0000,
+    0 0 40px #8b0000,
+    5px 5px 0 #000,
+    -2px -2px 0 #000;
+  margin-bottom: 20px;
+  letter-spacing: 5px;
+  animation: bloodPulse 2s infinite;
+}
+@keyframes bloodPulse {
+  0%,
+  100% {
+    text-shadow:
+      0 0 20px #ff0000,
+      0 0 40px #8b0000,
+      5px 5px 0 #000;
+  }
+  50% {
+    text-shadow:
+      0 0 30px #ff0000,
+      0 0 60px #8b0000,
+      5px 5px 0 #000;
+  }
+}
+.hero-subtitle {
+  font-family: "Eater", cursive;
+  font-size: 28px;
+  color: #666;
+  margin-bottom: 40px;
+  letter-spacing: 3px;
+}
+.cta-button {
+  padding: 15px 50px;
+  background: linear-gradient(135deg, #8b0000, #4b0000);
+  border: 2px solid #ff0000;
+  color: #fff;
+  font-size: 18px;
+  font-family: "Butcherman", cursive;
+  letter-spacing: 2px;
+  cursor: none;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+  box-shadow: 0 0 20px rgba(139, 0, 0, 0.5);
+}
+.cta-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 0, 0, 0.3),
+    transparent
+  );
+  transition: left 0.5s;
+}
+.cta-button:hover::before {
+  left: 100%;
+}
+.cta-button:hover {
+  box-shadow: 0 0 40px rgba(255, 0, 0, 0.8);
+  transform: scale(1.05);
+}
+
+/* Comic Panels */
+.comic-section {
+  min-height: 100vh;
+  padding: 100px 60px;
+  position: relative;
+}
+.section-title {
+  font-family: "Nosifer", cursive;
+  font-size: 60px;
+  text-align: center;
+  color: #8b0000;
+  margin-bottom: 80px;
+  text-shadow: 0 0 20px #ff0000;
+  animation: fadeInUp 1s ease;
+}
+.comic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.comic-card {
+  background: #0a0a0a;
+  border: 3px solid #1a1a1a;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+.comic-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(139, 0, 0, 0.1),
+    transparent
+  );
+  transform: rotate(45deg);
+  transition: all 0.5s;
+}
+.comic-card:hover::before {
+  top: 100%;
+}
+.comic-card:hover {
+  border-color: #8b0000;
+  box-shadow: 0 10px 60px rgba(139, 0, 0, 0.5);
+  transform: translateY(-10px) scale(1.02);
+}
+.comic-image {
+  width: 100%;
+  height: 400px;
+  background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #333;
+}
+.comic-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.comic-title {
+  font-family: "Creepster", cursive;
+  font-size: 24px;
+  color: #8b0000;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+.comic-description {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.6;
+  font-family: "Metal Mania", cursive;
+}
+
+/* Story Section */
+.story-section {
+  min-height: 100vh;
+  padding: 100px 60px;
+  position: relative;
+  background: linear-gradient(180deg, #000 0%, #1a0000 100%);
+}
+.story-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.story-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 100px;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s ease;
+}
+.story-panel.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.story-panel:nth-child(even) {
+  direction: rtl;
+}
+.story-panel:nth-child(even) > * {
+  direction: ltr;
+}
+.story-image {
+  width: 100%;
+  height: 500px;
+  background: #111;
+  border: 3px solid #8b0000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(139, 0, 0, 0.3);
+}
+.story-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.story-text h3 {
+  font-family: "Creepster", cursive;
+  font-size: 42px;
+  color: #8b0000;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px #ff0000;
+}
+.story-text p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #999;
+  font-family: "Metal Mania", cursive;
+}
+
+/* Footer */
+footer {
+  min-height: 100vh;
+  padding: 60px;
+  background: url("res.jpg") center/cover no-repeat;
+  border-top: 2px solid #8b0000;
+  text-align: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 0;
+}
+.footer-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.footer-text {
+  font-family: "Butcherman", cursive;
+  color: #666;
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+}
+.social-links a {
+  color: #8b0000;
+  font-size: 24px;
+  transition: all 0.3s;
+}
+.social-links a:hover {
+  color: #ff0000;
+  text-shadow: 0 0 10px #ff0000;
+  transform: scale(1.2);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .hero-title {
+    font-size: 60px;
+  }
+  .hero-subtitle {
+    font-size: 22px;
+  }
+  .cta-button {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+  .section-title {
+    font-size: 40px;
+  }
+  .comic-section,
+  .story-section {
+    padding: 60px 20px;
+  }
+  .story-panel {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .story-image {
+    height: 300px;
+  }
+  .comic-image {
+    height: 260px;
+  }
+  nav {
+    padding: 20px 20px;
+  }
+  .nav-links {
+    gap: 16px;
+    font-size: 14px;
+  }
+  .comic-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+  .hero-title {
+    font-size: 36px;
+    letter-spacing: 3px;
+  }
+  .hero-subtitle {
+    font-size: 18px;
+  }
+  .cta-button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+  .section-title {
+    font-size: 30px;
+  }
+  .story-image {
+    height: 220px;
+  }
+  .comic-image {
+    height: 220px;
+  }
+  .footer-content {
+    padding: 20px;
+  }
+  .social-links {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  nav {
+    padding: 14px 16px;
+  }
+  .menu-toggle {
+    display: block;
+  }
+  .nav-links {
+    display: none;
+  }
+  .footer {
+    background-size: 140% auto;
+    background-position: center top;
+  }
+  .footer-content {
+    padding: 24px;
+  }
+}
