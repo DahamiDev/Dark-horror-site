@@ -9,7 +9,7 @@
 
 body {
   font-family: "Metal Mania", cursive;
-  background: #000;
+  background: #0000;
   color: #fff;
   overflow-x: hidden;
 }
@@ -18,7 +18,7 @@ body {
 .custom-cursor {
   width: 20px;
   height: 20px;
-  border: 2px solid #8b0000;
+  border: 2px solid #8b0010;
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
